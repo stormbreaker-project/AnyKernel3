@@ -4,12 +4,12 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Predator Kernel by sohamsen@xda
+kernel.string=Stormbreaker kernel
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=lavender
+device.name1=violet
 supported.versions=9 - 10
 supported.patchlevels=
 '; } # end properties
