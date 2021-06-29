@@ -46,7 +46,7 @@ fi
 
 # Fallback mechanism but needs to be configured by the user
 if [ -f /tmp/oos ]; then
-  OOS=1
+  OOS="$(cat /tmp/oos)"
 fi;
 
 # begin ramdisk changes
