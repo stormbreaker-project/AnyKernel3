@@ -28,9 +28,38 @@ ramdisk_compression=auto;
 ## AnyKernel install
 dump_boot;
 
+# Pre patch command line
+patch_cmdline "dfps.min_fps" " "
+patch_cmdline "dfps.max_fps" " "
+
+MIN_FPS=60
+MAX_FPS=120
+OOS=0
+
+# Detect ROM
+if [ -e /vendor/odm/etc/buildinfo/oem_build.prop ]; then
+  OOS=1
+  os_string="OxygenOS";
+else
+  os_string="Custom ROM";
+fi
+
+# Fallback mechanism but needs to be configured by the user
+if [ -f /tmp/oos ]; then
+  OOS=1
+fi;
+
 # begin ramdisk changes
 # end ramdisk changes
 
+# Begin patching command line
+if [ "$OOS" == 1 ]; then
+  ui_print "$os ,Patching cmdline with arguments:"
+  ui_print "kpti=off dfps.min_fps=$MIN_FPS dfps.max_fps=$MAX_FPS"
+  patch_cmdline "kpti=off" "kpti=off dfps.min_fps=$MIN_FPS dfps.max_fps=$MAX_FPS"
+  else
+  ui_print "$os not doing any changes to conmand line"
+fi
+
 write_boot;
 ## end install
-
